@@ -4,16 +4,25 @@ import Signup from "./components/Signup";
 import Header from "./components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Login from "./components/Login";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AddExpense from "./components/AddExpense";
 
 function App() {
-  // const notify = () => toast.success("Wow so easy!");
-  // const notifyError = () => toast.error("password not matched")
+
   return (
-    <div className="App">
+    <BrowserRouter>
+      <div className="App">
       <Header />
-      <Signup />
-      <ToastContainer/>
-    </div>
+        <Routes>
+          <Route path="/" element={<Signup/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/expenses" element={<AddExpense/>}/>
+        </Routes>
+        <ToastContainer />
+      </div>
+    </BrowserRouter>
   );
 }
 

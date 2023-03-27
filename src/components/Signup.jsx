@@ -1,11 +1,13 @@
 import { Button, Form, Input, Radio } from "antd";
 import validation from "../functions/validation";
+import { useNavigate, Link } from "react-router-dom"
 
 import { toast } from "react-toastify";
 import axios from "axios";
 
 const Signup = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate()
 
   const onReset = () => {
     form.resetFields();
@@ -33,6 +35,10 @@ const Signup = () => {
         .post(`https://expense-tracker-server-hpwx.onrender.com/user`, formValues)
         .then((res) => {
           toast.success("user created sucessfully");
+          // console.log(res)
+          window.localStorage.setItem("user",res.data.firstName);
+          window.localStorage.setItem("userId",res.data._id);
+          navigate(`/expenses`)
         }).catch(error=>{console.log("eoor",error);toast.error("Error: User already exist please login")});
     }
   };
@@ -132,7 +138,7 @@ const Signup = () => {
         >
           <Input.Password />
         </Form.Item>
-
+          have account <Link to="/login" >login</Link>
         <Form.Item
           wrapperCol={{
             offset: 8,
