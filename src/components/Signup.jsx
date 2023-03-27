@@ -2,26 +2,40 @@ import { Button, Form, Input, Radio } from "antd";
 import validation from "../functions/validation";
 
 import { toast } from "react-toastify";
-import axios from "axios"
-
+import axios from "axios";
 
 const Signup = () => {
   const [form] = Form.useForm();
 
   const onReset = () => {
     form.resetFields();
-    console.log("hdhjkjdsnk")
+    console.log("hdhjkjdsnk");
   };
 
-  const onFinish = (values) =>{
-    const validate=validation(values);
-    if(!validate){
-        return toast.error("password not matched");
+  const onFinish = async (values) => {
+    const validate = validation(values);
+    if (!validate) {
+      return toast.error("password not matched");
+    } else {
+      // return toast.success("user registered successfully");
+      const { firstname, lastname, gender, email,address, password, confirmpassword } =
+        values;
+      const formValues = {
+        firstName: firstname,
+        lastName: lastname,
+        gender,
+        email,
+        password,
+        expenseId: 1234,
+        address
+      };
+      await axios
+        .post(`https://expense-tracker-server-hpwx.onrender.com/user`, formValues)
+        .then((res) => {
+          toast.success("user created sucessfully");
+        }).catch(error=>{console.log("eoor",error);toast.error("Error: User already exist please login")});
     }
-    else{
-        return toast.success("user registered successfully");
-    }
-  }
+  };
 
   return (
     <div className="signup_wrapper">
@@ -84,7 +98,7 @@ const Signup = () => {
             {
               required: true,
               message: "Please enter your email!",
-              type: "email"
+              type: "email",
             },
           ]}
           tooltip="enter your email"
