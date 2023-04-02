@@ -138,7 +138,7 @@ const Signup = () => {
         >
           <Input.Password />
         </Form.Item>
-          have account <Link to="/login" >login</Link>
+          have account <Link to="/" >login</Link>
         <Form.Item
           wrapperCol={{
             offset: 8,

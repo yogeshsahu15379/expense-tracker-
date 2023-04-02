@@ -89,7 +89,7 @@ const Login = () => {
             >
               <Input.Password />
             </Form.Item>
-            new user? <Link to="/">signup</Link>
+            new user? <Link to="/signup">signup</Link>
             <Form.Item
               wrapperCol={{
                 offset: 8,
