@@ -19,7 +19,7 @@ const Login = () => {
     setLoading(true);
     console.log(email, password);
     await axios
-      .post(`http://localhost:8000/user/login`, { ...values })
+      .post(`https://expense-tracker-server-hpwx.onrender.com/user/login`, { ...values })
       .then((res) => {
         setLoading(false);
         toast.success("user Login sucessfully");
